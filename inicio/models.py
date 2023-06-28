@@ -7,3 +7,4 @@ class Estudiantes(models.Model):
         edad = models.IntegerField()
         fecha_nacimiento = models.DateField(null=True)
 
+

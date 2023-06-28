@@ -5,3 +5,5 @@ class CrearEstudianteFormulario(forms.Form):
     edad = forms.IntegerField()
     fecha_nacimiento = forms.DateField(required=False)
  
+class BuscarEstudianteFormulario(forms.Form):
+    nombre = forms.CharField(max_length=100)
