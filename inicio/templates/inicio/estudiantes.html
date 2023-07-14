@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Estudiantes</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Estudiantes
+{% endblock h1_header %}
+
+{% block contenido %}
+
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        
+        <button>
+            <a class="navbar-brand" href={% url 'inicio:crear_estudiante' %}>Crear estudiante</a>
+        </button>
+
+        <form action={% url 'inicio:estudiantes' %}>
+            <table>
+                    {{formulario}}
+            </table>
+            <button>Buscar</button>
+        </form>
+    </div>
+</nav>
+        {% if listado_estudiantes %}
+        {% for estudiantes in listado_estudiantes %}
+        <nav class="navbar navbar-light bg-light static-top">
+            <div class="container">
+        
+                <li>
+            {% comment %} <nav class="navbar navbar-light bg-light static-top">
+                <div class="container"> {% endcomment %}
+
+                    <a href={% url 'inicio:detalle_estudiantes' estudiantes.id %}>{{estudiantes}}</a>
+                    <button>
+                        <a class="navbar-brand" href={% url 'inicio:modificar_estudiantes' estudiantes.id %}>Modificar</a>
+                    </button>
+                    <button>
+                        <a  class="navbar-brand" href={% url 'inicio:eliminar_estudiantes' estudiantes.id %}>Eliminar</a>
+                    </button>
+                {% comment %} </div>
+            </nav> {% endcomment %}
+                </li>
+            </div>
+        </nav>
+
+{% endfor %}
+{% else %}
+<p>No hay datos</p>
+{% endif %}
+
+{% endblock contenido %}

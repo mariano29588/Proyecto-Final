@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Eliminar estudiante</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Eliminar estudiante {{estudiantes.nombre}}
+{% endblock h1_header %}
+
+{% block contenido %}
+
+
+<form action= {% url 'inicio:eliminar_estudiantes' estudiantes.id %} method="post">
+    {% csrf_token %}
+    <p>Va a eliminar a {{estudiantes}}</p>
+    <button>Confirmar</button>
+</form>
+
+{% endblock contenido %}
