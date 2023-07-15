@@ -22,12 +22,22 @@
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
             <div class="container">
+                {% comment %} <a class="navbar-brand" href={% url 'inicio:info_pagina' %}>Info Pagina</a> {% endcomment %}
                 <a class="navbar-brand" href={% url 'inicio:inicio' %}>Inicio</a>
                 {% comment %} <a class="btn btn-primary" href={% url 'inicio:crear_estudiante' %}>Crear estudiante</a> {% endcomment %}
                 {% comment %} <a class="navbar-brand" href={% url 'inicio:listado_estudiantes' %}>Listado estudiantes</a>
                 {% comment %} <a class="navbar-brand" href={% url 'inicio:crear_estudiante' %}>Crear estudiante</a> {% endcomment %}
                 <a class="navbar-brand" href={% url 'inicio:estudiantes' %}>Estudiantes</a>
-                <a class="btn btn-primary" href="#">Iniciar sesion</a>
+                {% if request.user.is_authenticated %}
+                {% if request.user.infoextra.avatar %}      
+                <img src={{request.user.infoextra.avatar.url}} alt=""height='40p'>
+                {% endif %}
+                <a class="navbar-brand" href={% url 'usuario:editar_perfil' %}>{{request.user.username}}</a>
+                <a class="btn btn-primary" href={% url 'usuario:logout' %}>Logout</a>
+                {% else %}
+                <a class="btn btn-primary" href={% url 'usuario:login' %}>Login</a>
+                <a class="btn btn-primary" href={% url 'usuario:registrarse' %}>Registrarse</a>
+                {% endif %}
             </div>
         </nav>
         <!-- Masthead-->
@@ -49,6 +59,7 @@
             </div>
         </header>
         {% block contenido %}
+        <p>Soy el template padre!</p>
         {% endblock contenido %}
 
         <!-- Footer-->
@@ -57,12 +68,12 @@
                 <div class="row">
                     <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
                         <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">About</a></li>
+                            <li class="list-inline-item"><a class="navbar-brand" href={% url 'inicio:info_pagina' %}>About</a></li>
                       
                         </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2021. All Rights Reserved.</p>
+                        <p class="text-muted small mb-4 mb-lg-0">Pagina realizada por Mariano Melidoni</p>
                     </div>
-                    <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                    {% comment %} <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
                         <ul class="list-inline mb-0">
                             <li class="list-inline-item me-4">
                                 <a href="#!"><i class="bi-facebook fs-3"></i></a>
@@ -74,7 +85,7 @@
                                 <a href="#!"><i class="bi-instagram fs-3"></i></a>
                             </li>
                         </ul>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
             </div>
         </footer>

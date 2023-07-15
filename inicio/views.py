@@ -5,14 +5,19 @@ from django.http import HttpResponse
 
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
-
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
 def inicio(request):
     return render(request, 'inicio/inicio.html')
 
+def info_pagina(request):
+    return render(request, 'inicio/info_pagina.html')
+
+@login_required
 def crear_estudiante(request):
     mensaje = ''
 
@@ -20,7 +25,7 @@ def crear_estudiante(request):
         formulario = CrearEstudianteFormulario(request.POST)
         if formulario.is_valid():
             info = formulario.cleaned_data
-            estudiante = Estudiantes(nombre=info['nombre'],edad=info['edad'], fecha_nacimiento=info['fecha_nacimiento'])
+            estudiante = Estudiantes(nombre=info['nombre'], apellido=info['apellido'], edad=info['edad'], fecha_nacimiento=info['fecha_nacimiento'], descripcion = info['descripcion'])
             estudiante.save()
             mensaje = f'Se creo el estudiante {estudiante.nombre}'
                                     
@@ -31,6 +36,7 @@ def crear_estudiante(request):
     return render(request, 'inicio/crear_estudiante.html', {'formulario': formulario, 'mensaje': mensaje})
 
 
+@login_required
 def listado_estudiantes(request):
 
     formulario = BuscarEstudianteFormulario(request.GET)
@@ -61,14 +67,16 @@ def listado_estudiantes(request):
         # return render(request, 'inicio/listado_estudiantes.html', {'formulario': formulario})
 
 
+
+
 class DetalleEstudiantes(DetailView):
      model = Estudiantes
      template_name = "inicio/detalle_estudiantes.html"
 
- 
+
 class ModificarEstudiantes(UpdateView):
      model = Estudiantes
-     fields = ['nombre', 'edad', 'fecha_nacimiento']
+     fields = ['nombre', 'apellido', 'edad', 'fecha_nacimiento', 'descripcion']
      template_name = "inicio/modificar_estudiantes.html"
      success_url = reverse_lazy('inicio:estudiantes')
      
@@ -77,6 +85,11 @@ class EliminarEstudiantes(DeleteView):
     model = Estudiantes
     template_name = "inicio/eliminar_estudiantes.html"
     success_url = reverse_lazy('inicio:estudiantes')
+
+
+
+
+
 
 
 
