@@ -1,5 +1,4 @@
 asgiref==3.7.2
-clientes @ file:///C:/Users/Melidoni/Desktop/py/Clientes_Compras/dist/clientes-1.0.tar.gz#sha256=20f0301b7e815f81b597bacb53beaf052207af9b8421b44eada013d385cb90ec
 distlib==0.3.7
 Django==4.2.2
 django-ckeditor==6.6.1
