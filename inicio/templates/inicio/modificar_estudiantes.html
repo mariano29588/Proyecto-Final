@@ -11,12 +11,30 @@ Modificar estudiante {{estudiantes.nombre}}
 {% block contenido %}
 
 
+<form action="{% url 'inicio:modificar_estudiantes' estudiantes.id %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+        {{form.media}}
+    </table>
+    <button>Modificar</button>
+</form>
+
+{% if estudiantes.imagen %}
+    <p>Imagen actual:</p>
+    <img src="{{ estudiantes.imagen.url }}" alt="{{ estudiantes.nombre }}" width="200">
+{% else %}
+    <p>No hay imagen disponible.</p>
+{% endif %}
+
+
+{% comment %} 
 <form action= {% url 'inicio:modificar_estudiantes' estudiantes.id %} method="post">
     {% csrf_token %}
     <table>
             {{form}}
     </table>
     <button>Modificar</button>
-</form>
+</form> {% endcomment %}
 
 {% endblock contenido %}

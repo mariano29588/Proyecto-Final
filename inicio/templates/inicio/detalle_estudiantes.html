@@ -13,4 +13,11 @@ Datos del estudiantes {{estudiantes.nombre}}
 <li>Apellido: {{estudiantes.apellido}}</li>
 <li>Edad: {{estudiantes.edad}}</li>
 <li>Fecha de nacimiento: {{estudiantes.fecha_nacimiento}}</li>
+<li>Descripcion: {{estudiantes.descripcion | safe}}</li>
+{% if estudiantes.imagen %}
+    <li><img src="{{ estudiantes.imagen.url }}" alt="{{ estudiantes.nombre }}"></li>
+{% else %}
+    <li>No hay imagen disponible.</li>
+{% endif %}
+{% comment %} <li><img src="{{ estudiantes.imagen.url }}" alt="{{ estudiantes.nombre }}"></li> {% endcomment %}
 {% endblock contenido %}

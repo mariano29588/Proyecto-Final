@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Edicion perfil</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Editar perfil
+{% endblock h1_header %}
+
+{% block contenido %}
+<li>Nombre: {{ request.user.first_name }}</li>
+<li>Apellido: {{ request.user.last_name }}</li>
+<li>Email: {{ request.user.email }}</li>
+
+<button type='button'><a href={% url 'usuario:editar_perfil' %}>Editar Perfil</a></button>
+{% endblock contenido %}
