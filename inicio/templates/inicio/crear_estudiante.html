@@ -10,11 +10,18 @@ Crear estudiante
 
 {% block contenido %}
 
+{% if mensaje %}
+  <div class="alert alert-success">
+    {{ mensaje }}
+  </div>
+{% endif %}
 
-<form action= {% url 'inicio:crear_estudiante' %} method="post">
-    {% csrf_token %}
+{% comment %} <form action= {% url 'inicio:crear_estudiante' %} method="post"> {% endcomment %}
+<form action="{% url 'inicio:crear_estudiante' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %}
     <table>
             {{formulario}}
+            {{formulario.media}}
     </table>
     <button>Crear</button>
 </form>
